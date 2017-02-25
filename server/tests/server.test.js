@@ -1,6 +1,6 @@
 const expect = require('expect');
 const request = require('supertest');
-const {ObjectId} = require('mongodb')
+const {ObjectId} = require('mongodb');
 
 
 const {app} = require('./../server');
@@ -127,6 +127,7 @@ describe('DELETE /todos/:id', () => {
         }
         Todo.find().then((todos) => {
           expect(todos.length).toBe(1);
+          expect(todos[0]._id.text).toNotExist(res.body.todo._id.text)
           done()
         }).catch((e) => {
           done(e)
